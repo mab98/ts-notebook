@@ -12,3 +12,46 @@
   padding: 20px;
   margin: 20px;
 }
+
+.display-notes {
+  border: 1px solid green;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 650px;
+  padding: 10px 0;
+}
+
+.all-notes h1,
+.all-notes #no-note {
+  padding: 0 10px;
+}
+
+.all-notes {
+  border: 1px solid green;
+  width: 200px;
+}
+
+.clicked-note {
+  border: 1px solid green;
+  padding: 5px;
+  margin: 5px;
+  overflow: hidden;
+  word-break: break-all;
+}
+.clicked-note-container {
+  border: 1px solid green;
+  width: 400px;
+  padding: 5px 10px;
+}
+
+.note {
+  border: 1px solid green;
+  height: 85px;
+  margin: 5px;
+  overflow: hidden;
+  padding: 5px;
+}
+.note:hover {
+  background: yellow;
+}

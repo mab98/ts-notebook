@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import './App.css';
 import AddNote from './components/AddNote';
-import NoteList from "./components/NoteList";
+import DisplayNotes from "./components/DisplayNotes";
 
 export interface INote {
   id: string;
@@ -14,7 +14,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <AddNote notes={notes} setNotes={setNotes} />
-      <NoteList notes={notes} />
+      <DisplayNotes notes={notes} />
     </div>
   );
 }

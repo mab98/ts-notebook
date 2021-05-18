@@ -3,16 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Button, Row, Col } from 'antd';
 import TextArea from "antd/lib/input/TextArea";
 import { INote } from '../App';
-const layout = {
-    wrapperCol: {
-        span: 22,
-    },
-};
-const tagsLayout = {
-    wrapperCol: {
-        span: 18,
-    },
-};
 
 interface AddNoteProps {
     notes: INote[];
@@ -30,7 +20,8 @@ const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
     const addNote = (): void => {
         setNotes([...notes, { id: uuidv4(), text, tags }]);
         form.resetFields();
-        console.log(text, tags, notes);
+        setText('');
+        setTags('');
     }
 
     const [form] = Form.useForm();
@@ -41,13 +32,13 @@ const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
 
     return (
         <>
-            <Form {...layout} form={form} className='add-note' onFinish={addNote} fields={fields}>
-                <Form.Item name="text" label="Text" >
-                    <TextArea placeholder='write text here' name='text' onChange={handleTextChange} />
+            <Form form={form} className='add-note' onFinish={addNote} fields={fields}>
+                <Form.Item name="text" label="Text" rules={[{ required: true }]} >
+                    <TextArea rows={3} placeholder='write text here' name='text' onChange={handleTextChange} />
                 </Form.Item>
                 <Row>
                     <Col>
-                        <Form.Item  {...tagsLayout} name="tags" label="Tags" >
+                        <Form.Item name="tags" label="Tags" rules={[{ required: true }]} >
                             <Input type="text" placeholder='add tags here' name='tags' onChange={handleTagsChange} />
                         </Form.Item>
                     </Col>
