@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState } from 'react';
 import { INote } from '../App';
 import AllNotes from './AllNotes';

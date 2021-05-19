@@ -22,27 +22,27 @@
   padding: 10px 0;
 }
 
-.all-notes h1,
-.all-notes #no-note {
-  padding: 0 10px;
-}
-
 .all-notes {
   border: 1px solid green;
   width: 200px;
 }
 
-.clicked-note {
-  border: 1px solid green;
-  padding: 5px;
-  margin: 5px;
-  overflow: hidden;
-  word-break: break-all;
+.all-notes h1,
+.all-notes #no-note {
+  padding: 0 10px;
 }
+
 .clicked-note-container {
   border: 1px solid green;
   width: 400px;
   padding: 5px 10px;
+}
+
+.clicked-note {
+  border: 1px solid green;
+  padding: 5px;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .note {
@@ -52,6 +52,21 @@
   overflow: hidden;
   padding: 5px;
 }
+
 .note:hover {
   background: yellow;
+}
+
+.color-button {
+  padding: 0 10px;
+  margin: 0 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
 }
