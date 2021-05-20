@@ -5,6 +5,29 @@ import TextArea from "antd/lib/input/TextArea";
 import { INote } from '../App';
 import { ColorResult, CompactPicker } from 'react-color';
 import Tippy from '@tippyjs/react';
+import styled from 'styled-components';
+
+const AddNoteContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 35px;
+`
+const AddNoteForm = styled(Form)`
+  box-shadow: 0px 1px 3px 1px rgba(138, 130, 130, 0.5);
+  border-radius: 5px;
+  padding: 20px;
+  .ant-form-item {
+    margin: 5px 0 5px 0;
+  }
+  .ant-form-item-label > label {
+    height: 10px;
+    width: 50px;
+  }
+`
+const ColorButton = styled(Button)`
+  padding: 0 10px;
+  margin: 0 10px;
+`
 
 interface AddNoteProps {
     notes: INote[];
@@ -36,15 +59,19 @@ const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
     ]);
 
     return (
-        <>
-            <Form form={form} className='add-note' onFinish={addNote} fields={fields}>
-                <Form.Item name="text" label="Text" rules={[{ required: true }]} >
-                    <TextArea rows={3} placeholder='write text here' name='text' onChange={handleTextChange} />
-                </Form.Item>
+        <AddNoteContainer>
+            <AddNoteForm form={form} onFinish={addNote} fields={fields}>
+                <Row>
+                    <Col span={24}>
+                        <Form.Item name="text" rules={[{ required: true }]} >
+                            <TextArea rows={2} placeholder='Text...' name='text' onChange={handleTextChange} />
+                        </Form.Item>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
-                        <Form.Item name="tags" label="Tags" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='add tags here' name='tags' onChange={handleTagsChange} />
+                        <Form.Item name="tags" rules={[{ required: true }]} >
+                            <Input type="text" placeholder='Tag...' name='tags' onChange={handleTagsChange} />
                         </Form.Item>
                     </Col>
                     <Col>
@@ -52,14 +79,14 @@ const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
                             <Tippy interactive={true} content={
                                 <CompactPicker color={selectedColor} onChangeComplete={(color: ColorResult) => setSelectedColor(color.hex)} />
                             }>
-                                <Button className='color-button' style={{ backgroundColor: selectedColor }}> Color </Button>
+                                <ColorButton style={{ backgroundColor: selectedColor }}> Color  </ColorButton>
                             </Tippy>
                             <Button type="primary" htmlType="submit"> Add Note </Button>
                         </Form.Item>
                     </Col>
                 </Row>
-            </Form>
-        </>
+            </AddNoteForm>
+        </AddNoteContainer>
     )
 }
 

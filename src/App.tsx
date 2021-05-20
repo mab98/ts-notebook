@@ -1,8 +1,16 @@
 import React, { useState } from "react"
 import './App.css';
 import AddNote from './components/AddNote';
-import DisplayNotes from "./components/DisplayNotes";
+import AllNotes from "./components/AllNotes";
 import Header from "./components/Header";
+import styled from "styled-components";
+
+const AppSC = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`
 
 export interface INote {
   id: string;
@@ -14,11 +22,13 @@ export interface INote {
 const App: React.FC = () => {
   const [notes, setNotes] = useState<INote[]>([]);
   return (
-    <div className="App">
+    <>
       <Header />
-      <AddNote notes={notes} setNotes={setNotes} />
-      <DisplayNotes notes={notes} />
-    </div>
+      <AppSC>
+        <AddNote notes={notes} setNotes={setNotes} />
+        <AllNotes notes={notes} />
+      </AppSC>
+    </>
   );
 }
 
