@@ -3,7 +3,9 @@ import './App.css';
 import AddNote from './components/AddNote';
 import AllNotes from "./components/AllNotes";
 import Header from "./components/Header";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import GlobalStyles from "./modeStyles/globalStyles";
+import { light, dark } from "./modeStyles/themes";
 
 const AppSC = styled.div`
   display: flex;
@@ -21,14 +23,17 @@ export interface INote {
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<INote[]>([]);
+  const [theme, setTheme] = useState(light);
+  const toggleTheme = () => { setTheme(theme.title === 'light' ? dark : light); };
   return (
-    <>
-      <Header />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Header text="Notebook" toggleTheme={toggleTheme} />
       <AppSC>
         <AddNote notes={notes} setNotes={setNotes} />
         <AllNotes notes={notes} />
       </AppSC>
-    </>
+    </ThemeProvider>
   );
 }
 
