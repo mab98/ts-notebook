@@ -13,6 +13,7 @@ const AddNoteContainer = styled.div`
   padding: 35px;
 `
 const AddNoteForm = styled(Form)`
+  margin: 10px;
   box-shadow: 0px 1px 3px 1px rgba(138, 130, 130, 0.5);
   border-radius: 5px;
   padding: 20px;
