@@ -29,15 +29,15 @@ const ModalSC = styled(Modal)`
 
 const Note: React.FC<{ note: INote }> = ({ note }) => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const showModal = () => {
+  const showModal = (): void => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  const handleOk = (): void => {
     setIsModalVisible(false);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setIsModalVisible(false);
   };
 

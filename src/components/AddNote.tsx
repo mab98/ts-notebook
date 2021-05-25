@@ -32,30 +32,37 @@ const ColorButton = styled(Button)`
 
 interface AddNoteProps {
     notes: INote[];
-    setNotes: Function;
+    setNotes: React.Dispatch<React.SetStateAction<INote[]>>;
 }
 
 const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
-    const [text, setText] = useState('');
-    const [tags, setTags] = useState('');
+    const [input, setInput] = useState({
+        text: '',
+        tags: '',
+    });
     const [selectedColor, setSelectedColor] = useState('#fff');
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setText(e.target.value)
-
-    const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>): void => setTags(e.target.value)
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const addNote = (): void => {
-        setNotes([...notes, { id: uuidv4(), text, tags, selectedColor }]);
+        setNotes([...notes, { id: uuidv4(), ...input, selectedColor }]);
         form.resetFields();
-        setText('');
-        setTags('');
+        setInput({
+            text: '',
+            tags: '',
+        })
         setSelectedColor('#fff');
     }
 
     const [form] = Form.useForm();
     const [fields] = useState([
-        { name: ['text'], value: text },
-        { name: ['tags'], value: tags },
+        { name: ['text'], value: input.text },
+        { name: ['tags'], value: input.tags },
         { name: ['selectedColor'], value: selectedColor },
     ]);
 
@@ -65,14 +72,14 @@ const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
                 <Row>
                     <Col span={24}>
                         <Form.Item name="text" rules={[{ required: true }]} >
-                            <TextArea rows={2} placeholder='Text...' name='text' onChange={handleTextChange} />
+                            <TextArea rows={2} placeholder='Text...' name='text' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Item name="tags" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='Tag...' name='tags' onChange={handleTagsChange} />
+                            <Input type="text" placeholder='Tag...' name='tags' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                     <Col>
