@@ -4,7 +4,7 @@ export const light = {
     primary: '#fff',
     secondary: '#C62E65',
     background: '#f5f5f5',
-    text: 'chocolate',
+    text: 'black',
   },
 };
 

@@ -10,12 +10,14 @@ const NoteSC = styled.div`
   border-radius: 5px;
   padding: 3px 10px;
   width: 15.8rem;
-`
+  `
 const H3 = styled.h3`
   margin-bottom: 0px;
-`
+  color: ${({ theme }) => theme.colors.text};
+  `
 const NoteText = styled.p`
-word-break: break-all;
+  word-break: break-all;
+  color: ${({ theme }) => theme.colors.text};
 `
 const ModalSC = styled(Modal)`
   .ant-modal-body {
