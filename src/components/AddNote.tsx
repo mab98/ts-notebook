@@ -2,10 +2,12 @@ import React, { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Button, Row, Col } from 'antd';
 import TextArea from "antd/lib/input/TextArea";
-import { INote } from '../App';
 import { ColorResult, CompactPicker } from 'react-color';
 import Tippy from '@tippyjs/react';
 import styled from 'styled-components';
+import { addNoteAction } from "../store/action-creators";
+import { useDispatch, useSelector } from "react-redux";
+import { StoreState } from "../store/reducers";
 
 const AddNoteContainer = styled.div`
   display: flex;
@@ -30,12 +32,8 @@ const ColorButton = styled(Button)`
   margin: 0 10px;
 `
 
-interface AddNoteProps {
-    notes: INote[];
-    setNotes: Function;
-}
-
-const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
+const AddNote: React.FC = () => {
+    const dispatch = useDispatch();
     const [text, setText] = useState('');
     const [tags, setTags] = useState('');
     const [selectedColor, setSelectedColor] = useState('#fff');
@@ -45,7 +43,7 @@ const AddNote: React.FC<AddNoteProps> = ({ notes, setNotes }) => {
     const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>): void => setTags(e.target.value)
 
     const addNote = (): void => {
-        setNotes([...notes, { id: uuidv4(), text, tags, selectedColor }]);
+        dispatch(addNoteAction({ id: uuidv4(), text, tags, selectedColor }));
         form.resetFields();
         setText('');
         setTags('');

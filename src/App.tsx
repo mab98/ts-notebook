@@ -22,7 +22,6 @@ export interface INote {
 }
 
 const App: React.FC = () => {
-  const [notes, setNotes] = useState<INote[]>([]);
   const [theme, setTheme] = useState(light);
   const toggleTheme = () => { setTheme(theme.title === 'light' ? dark : light); };
   return (
@@ -30,8 +29,8 @@ const App: React.FC = () => {
       <GlobalStyles />
       <Header text="Notebook" toggleTheme={toggleTheme} />
       <AppSC>
-        <AddNote notes={notes} setNotes={setNotes} />
-        <AllNotes notes={notes} />
+        <AddNote />
+        <AllNotes />
       </AppSC>
     </ThemeProvider>
   );
