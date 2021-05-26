@@ -1,5 +1,4 @@
 import { INote } from '../App';
-import { DefaultTheme } from 'styled-components';
 import { ActionType } from './types';
 
 export interface INoteState {
@@ -11,9 +10,9 @@ interface IAddNote {
   payload: INote;
 }
 
-interface IToggleTheme {
-  type: ActionType.TOGGLE_THEME;
-  payload: DefaultTheme;
+export interface IDeleteNote {
+  type: ActionType.DELETE_NOTE;
+  payload: 'string';
 }
 
-export type Action = IAddNote | IToggleTheme;
+export type Action = IAddNote | IDeleteNote;

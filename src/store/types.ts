@@ -1,4 +1,4 @@
 export enum ActionType {
   ADD_NOTE = 'ADD_NOTE',
-  TOGGLE_THEME = 'TOGGLE_THEME',
+  DELETE_NOTE = 'DELETE_NOTE',
 }

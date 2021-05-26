@@ -15,6 +15,7 @@ const AllNotesSC = styled.div`
   align-items: baseline;
   width: 80vw;
 `
+
 const NoNotes = styled.p`
   margin: 2rem auto;
   color: lightgray;
@@ -28,8 +29,9 @@ const AllNotes: React.FC = () => {
   const { storeNotes } = useSelector((state: StoreState) => state)
   return (
     <AllNotesSC>
-      { storeNotes.notes[0] ? storeNotes.notes.map((note: INote, key: number) => <Note key={note.id} note={note} />) : <NoNotes>
-        <FontAwesomeIcon size='5x' icon={faLightbulb} /> <br />Notes you add appear here</NoNotes>}
+      { storeNotes.notes[0]
+        ? storeNotes.notes.map((note: INote, key: number) => <Note key={note.id} note={note} />)
+        : <NoNotes> <FontAwesomeIcon size='5x' icon={faLightbulb} /> <br />Notes you add appear here </NoNotes>}
     </AllNotesSC>
   )
 }
