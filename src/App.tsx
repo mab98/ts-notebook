@@ -1,11 +1,12 @@
-import React, { useState } from "react"
+import React from "react"
 import './App.css';
 import AddNote from './components/AddNote';
 import AllNotes from "./components/AllNotes";
 import Header from "./components/Header";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, DefaultTheme } from "styled-components";
 import GlobalStyles from "./modeStyles/globalStyles";
 import { light, dark } from "./modeStyles/themes";
+import usePersistedState from "./utils/usePersistedState";
 
 const AppSC = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ export interface INote {
 }
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState(light);
+  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
   const toggleTheme = () => { setTheme(theme.title === 'light' ? dark : light); };
   return (
     <ThemeProvider theme={theme}>

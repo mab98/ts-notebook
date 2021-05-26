@@ -19,6 +19,7 @@ export const store = createStore(
   persistedState,
   composeWithDevTools()
 );
+
 type RootState = ReturnType<typeof store.getState>;
 function saveToLocalStorage(state: RootState) {
   try {
