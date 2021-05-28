@@ -14,6 +14,7 @@ const NoteSC = styled.div`
   `
 const H3 = styled.h3`
   margin-bottom: 0px;
+  overflow: hidden;
   color: ${({ theme }) => theme.colors.text};
   `
 const NoteText = styled.p`
@@ -33,15 +34,15 @@ const ModalSC = styled(Modal)`
 const Note: React.FC<{ note: INote }> = ({ note }) => {
   const dispatch = useDispatch()
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const showModal = () => {
+  const showModal = (): void => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  const handleOk = (): void => {
     setIsModalVisible(false);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setIsModalVisible(false);
   };
 

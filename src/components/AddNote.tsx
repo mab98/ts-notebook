@@ -6,8 +6,7 @@ import { ColorResult, CompactPicker } from 'react-color';
 import Tippy from '@tippyjs/react';
 import styled from 'styled-components';
 import { addNoteAction } from "../store/action-creators";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from "../store/reducers";
+import { useDispatch } from "react-redux";
 
 const AddNoteContainer = styled.div`
   display: flex;
@@ -33,27 +32,35 @@ const ColorButton = styled(Button)`
 `
 
 const AddNote: React.FC = () => {
-    const dispatch = useDispatch();
-    const [text, setText] = useState('');
-    const [tags, setTags] = useState('');
+    const [input, setInput] = useState({
+        text: '',
+        tags: '',
+    });
     const [selectedColor, setSelectedColor] = useState('#fff');
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => setText(e.target.value)
+    const dispatch = useDispatch();
 
-    const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>): void => setTags(e.target.value)
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const addNote = (): void => {
-        dispatch(addNoteAction({ id: uuidv4(), text, tags, selectedColor }));
+        dispatch(addNoteAction({ id: uuidv4(), ...input, selectedColor }));
         form.resetFields();
-        setText('');
-        setTags('');
+        setInput({
+            text: '',
+            tags: '',
+        })
         setSelectedColor('#fff');
     }
 
     const [form] = Form.useForm();
     const [fields] = useState([
-        { name: ['text'], value: text },
-        { name: ['tags'], value: tags },
+        { name: ['text'], value: input.text },
+        { name: ['tags'], value: input.tags },
         { name: ['selectedColor'], value: selectedColor },
     ]);
 
@@ -63,14 +70,14 @@ const AddNote: React.FC = () => {
                 <Row>
                     <Col span={24}>
                         <Form.Item name="text" rules={[{ required: true }]} >
-                            <TextArea rows={2} placeholder='Text...' name='text' onChange={handleTextChange} />
+                            <TextArea rows={2} placeholder='Text...' name='text' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Form.Item name="tags" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='Tag...' name='tags' onChange={handleTagsChange} />
+                            <Input type="text" placeholder='Tag...' name='tags' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                     <Col>
