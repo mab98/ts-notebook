@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import '../App.css';
 import styled, { ThemeContext } from "styled-components";
-import Switch from "react-switch";
-import { shade } from "polished";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 const HeaderSC = styled.header`
   width: 100vw;
@@ -13,7 +12,6 @@ const HeaderSC = styled.header`
   padding: 0 30px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   background: ${({ theme }) => theme.colors.primary};
-
 `
 const H1 = styled.h1`
   margin-bottom: 0;
@@ -27,10 +25,14 @@ const HeaderLogo = styled.span`
 const HeaderLogoText = styled.span`
   font-size: 40px;
   font-family: 'Girassol', cursive;
-  color: chocolate;
   color: ${({ theme }) => theme.colors.text};
   position: absolute;
   top: -5px;
+`
+
+const DarkModeToggleSwitch = styled(DarkModeToggle)`
+  margin-top: 5px;
+  overflow: visible !important;
 `
 
 interface HeaderProps {
@@ -39,7 +41,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ text, toggleTheme }) => {
-  const { title, colors } = useContext(ThemeContext)
+  const { title } = useContext(ThemeContext)
   return (
     <HeaderSC>
       <H1>
@@ -48,9 +50,8 @@ const Header: React.FC<HeaderProps> = ({ text, toggleTheme }) => {
           <HeaderLogoText>{text}</HeaderLogoText>
         </HeaderLogo>
       </H1>
-      <Switch onChange={toggleTheme} checked={title === 'dark'} checkedIcon={false} uncheckedIcon={false} height={15} width={35} handleDiameter={20} offColor={shade(.15, '#e4a477')} offHandleColor="#D63AF9"
-        onColor={colors.secondary} />
-    </HeaderSC>
+      <DarkModeToggleSwitch onChange={toggleTheme} checked={title === 'dark'} size={50} />
+    </HeaderSC >
   )
 }
 
