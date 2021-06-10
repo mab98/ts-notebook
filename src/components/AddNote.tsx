@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Button, Row, Col } from 'antd';
 import TextArea from "antd/lib/input/TextArea";
-import { ColorResult, CompactPicker } from 'react-color';
+import { ColorResult, CirclePicker } from 'react-color';
 import Tippy from '@tippyjs/react';
 import styled from 'styled-components';
 import { addNoteAction } from "../store/action-creators";
@@ -83,7 +83,7 @@ const AddNote: React.FC = () => {
                     <Col>
                         <Form.Item>
                             <Tippy interactive={true} content={
-                                <CompactPicker color={selectedColor} onChangeComplete={(color: ColorResult) => setSelectedColor(color.hex)} />
+                                <CirclePicker color={selectedColor} circleSize={23} onChangeComplete={(color: ColorResult) => setSelectedColor(color.hex)} />
                             }>
                                 <ColorButton style={{ backgroundColor: selectedColor }}> Color  </ColorButton>
                             </Tippy>

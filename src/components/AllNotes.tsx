@@ -13,9 +13,9 @@ const AllNotesSC = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: baseline;
-  width: 80vw;
+  width: 95vw;
 `
 const NoNotes = styled.p`
   margin: 2rem auto;
@@ -55,4 +55,5 @@ const AllNotes: React.FC = () => {
     </AllNotesSC>
   )
 }
-export default AllNotes
+
+export default AllNotes;
