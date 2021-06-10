@@ -13,7 +13,7 @@ const AllNotesSC = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: baseline;
   width: 80vw;
 `
@@ -42,15 +42,7 @@ const AllNotes: React.FC = () => {
     <AllNotesSC>
       { storeNotes.notes[0]
         ?
-        <ResponsiveGridLayout
-          className="layout"
-          layout={generateLayout(storeNotes.notes)}
-          cols={12}
-          rowHeight={281}
-          isDraggable
-        >
-          {storeNotes.notes.map((note: INote) => <Note key={note.id} note={note} />)}
-        </ResponsiveGridLayout>
+        storeNotes.notes.map((note: INote) => <Note key={note.id} note={note} />)
         : <NoNotes> <FontAwesomeIcon size='5x' icon={faLightbulb} /> <br />Notes you add appear here </NoNotes>}
     </AllNotesSC>
   )
