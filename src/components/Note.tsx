@@ -10,7 +10,7 @@ const NoteSC = styled.div`
   margin-top: 0;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;  border-radius: 5px;
   padding: 3px 10px;
-  width: 15.8rem;
+  width: 100%;
   `
 const H3 = styled.h3`
   margin-bottom: 0px;
