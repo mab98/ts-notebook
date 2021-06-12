@@ -18,7 +18,7 @@ const AppSC = styled.div`
 export interface INote {
   id: string;
   text: string;
-  tags: string;
+  category: string;
   selectedColor: string;
 }
 

@@ -34,7 +34,7 @@ const ColorButton = styled(Button)`
 const AddNote: React.FC = () => {
     const [input, setInput] = useState({
         text: '',
-        tags: '',
+        category: '',
     });
     const [selectedColor, setSelectedColor] = useState('#fff');
 
@@ -52,7 +52,7 @@ const AddNote: React.FC = () => {
         form.resetFields();
         setInput({
             text: '',
-            tags: '',
+            category: '',
         })
         setSelectedColor('#fff');
     }
@@ -60,7 +60,7 @@ const AddNote: React.FC = () => {
     const [form] = Form.useForm();
     const [fields] = useState([
         { name: ['text'], value: input.text },
-        { name: ['tags'], value: input.tags },
+        { name: ['category'], value: input.category },
         { name: ['selectedColor'], value: selectedColor },
     ]);
 
@@ -76,8 +76,8 @@ const AddNote: React.FC = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <Form.Item name="tags" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='Tag...' name='tags' onChange={handleChange} />
+                        <Form.Item name="category" rules={[{ required: true }]} >
+                            <Input type="text" placeholder='Category...' name='category' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                     <Col>
