@@ -4,6 +4,7 @@ import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import { deleteNoteAction } from '../store/action-creators';
 import { useDispatch } from 'react-redux';
+import { DeleteOutlined } from '@ant-design/icons';
 
 const NoteSC = styled.div`
   margin: 10px;
@@ -13,6 +14,7 @@ const NoteSC = styled.div`
   width: 100%;
   `
 const H3 = styled.h3`
+  width: 80%;
   margin-bottom: 0px;
   overflow: hidden;
   color: ${({ theme }) => theme.colors.text};
@@ -50,9 +52,8 @@ const Note: React.FC<{ note: INote }> = ({ note }) => {
     <>
       <NoteSC style={{ backgroundColor: note.selectedColor }} onClick={showModal}>
         <H3><strong>{note.tags}</strong></H3>
+        <Button style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
         <NoteText>{note.text.slice(0, 35)} ...</NoteText>
-        <Button danger type="primary" onClick={() => dispatch(deleteNoteAction(note.id))
-        }>Delete</Button>
       </NoteSC>
       <ModalSC footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div style={{ backgroundColor: note.selectedColor, padding: '20px' }}>
