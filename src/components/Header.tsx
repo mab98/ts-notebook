@@ -16,7 +16,7 @@ const HeaderSC = styled.header`
 const H1 = styled.h1`
   margin-bottom: 0;
 `
-const HeaderLogo = styled.span`
+const HeaderLogo = styled.a`
   margin-top: 4px;
   position: absolute;
   top: 4px;
@@ -37,15 +37,16 @@ const DarkModeToggleSwitch = styled(DarkModeToggle)`
 
 interface HeaderProps {
   text: string;
+  href: string;
   toggleTheme(): void;
 }
 
-const Header: React.FC<HeaderProps> = ({ text, toggleTheme }) => {
+const Header: React.FC<HeaderProps> = ({ text, href, toggleTheme }) => {
   const { title } = useContext(ThemeContext)
   return (
     <HeaderSC>
       <H1>
-        <HeaderLogo>
+        <HeaderLogo href={href}>
           <img src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" alt="Google Keep Logo" />
           <HeaderLogoText>{text}</HeaderLogoText>
         </HeaderLogo>

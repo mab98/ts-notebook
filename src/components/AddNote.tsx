@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, Select } from 'antd';
 import TextArea from "antd/lib/input/TextArea";
 import { ColorResult, CirclePicker } from 'react-color';
 import Tippy from '@tippyjs/react';
 import styled from 'styled-components';
 import { addNoteAction } from "../store/action-creators";
 import { useDispatch } from "react-redux";
+import { INote } from "../App";
+const { Option } = Select;
 
 const AddNoteContainer = styled.div`
   display: flex;
@@ -19,11 +21,11 @@ const AddNoteForm = styled(Form)`
   border-radius: 5px;
   padding: 20px;
   .ant-form-item {
-    margin: 5px 0 5px 0;
+      margin: 5px 0 5px 0;
   }
   .ant-form-item-label > label {
-    height: 10px;
-    width: 50px;
+      height: 10px;
+      width: 50px;
   }
 `
 const ColorButton = styled(Button)`
@@ -31,8 +33,11 @@ const ColorButton = styled(Button)`
   margin: 0 10px;
 `
 
+type InputInterface = Pick<INote, 'title' | 'text' | 'category'>
+
 const AddNote: React.FC = () => {
-    const [input, setInput] = useState({
+    const [category, setCategory] = useState<string | undefined>();
+    const [input, setInput] = useState<InputInterface>({
         title: '',
         text: '',
         category: '',
@@ -41,12 +46,6 @@ const AddNote: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-    }
 
     const addNote = (): void => {
         dispatch(addNoteAction({ id: uuidv4(), ...input, selectedColor }));
@@ -61,10 +60,19 @@ const AddNote: React.FC = () => {
 
     const [form] = Form.useForm();
     const [fields] = useState([
+        { name: ['title'], value: input.title },
         { name: ['text'], value: input.text },
-        { name: ['category'], value: input.category },
+        { name: ['category'], value: category },
         { name: ['selectedColor'], value: selectedColor },
     ]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setInput({
+            ...input,
+            category,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         <AddNoteContainer>
@@ -83,10 +91,21 @@ const AddNote: React.FC = () => {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <Form.Item name="category" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='Category...' name='category' onChange={handleChange} />
+                <Row style={{ display: 'flex', justifyContent: "space-between" }}>
+                    <Col style={{ width: '134px' }}>
+                        <Form.Item
+                            name="category"
+                            rules={[{ required: true }]}
+                        >
+                            <Select
+                                placeholder="Category"
+                                style={{ width: '100%' }}
+                                onChange={(value: string) => setCategory(value)}
+                            >
+                                <Option value="Home">Home</Option>
+                                <Option value="Work">Work</Option>
+                                <Option value="Study">Study</Option>
+                            </Select>
                         </Form.Item>
                     </Col>
                     <Col>

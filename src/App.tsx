@@ -19,7 +19,7 @@ export interface INote {
   id: string;
   title: string;
   text: string;
-  category: string;
+  category: string | undefined;
   selectedColor: string;
 }
 
@@ -29,7 +29,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Header text="Notebook" toggleTheme={toggleTheme} />
+      <Header text="Notebook" href='#' toggleTheme={toggleTheme} />
       <AppSC>
         <AddNote />
         <AllNotes />

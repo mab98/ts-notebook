@@ -60,7 +60,7 @@ const Note: React.FC<{ note: INote }> = ({ note }) => {
       <NoteSC style={{ backgroundColor: note.selectedColor }} onClick={showModal}>
         <H3><strong>{note.title}</strong></H3>  {note.category}
         <Button style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
-        <NoteText>{note.text.length > 15 ? note.text.slice(0, 15) + '...' : note.text} </NoteText>
+        <NoteText>{note.text.length > 50 ? note.text.slice(0, 50) + '...' : note.text} </NoteText>
       </NoteSC>
       <ModalSC footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div style={{ backgroundColor: note.selectedColor, padding: '20px' }}>
