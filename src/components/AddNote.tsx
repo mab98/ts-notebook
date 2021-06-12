@@ -33,6 +33,7 @@ const ColorButton = styled(Button)`
 
 const AddNote: React.FC = () => {
     const [input, setInput] = useState({
+        title: '',
         text: '',
         category: '',
     });
@@ -51,6 +52,7 @@ const AddNote: React.FC = () => {
         dispatch(addNoteAction({ id: uuidv4(), ...input, selectedColor }));
         form.resetFields();
         setInput({
+            title: '',
             text: '',
             category: '',
         })
@@ -67,6 +69,13 @@ const AddNote: React.FC = () => {
     return (
         <AddNoteContainer>
             <AddNoteForm form={form} onFinish={addNote} fields={fields}>
+                <Row>
+                    <Col span={24}>
+                        <Form.Item name="title" rules={[{ required: true }]} >
+                            <Input type="text" placeholder='Title...' name='title' onChange={handleChange} />
+                        </Form.Item>
+                    </Col>
+                </Row>
                 <Row>
                     <Col span={24}>
                         <Form.Item name="text" rules={[{ required: true }]} >

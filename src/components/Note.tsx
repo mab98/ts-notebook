@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { INote } from '../App';
 import { Button, Modal } from 'antd';
+
 import styled from 'styled-components';
 import { deleteNoteAction } from '../store/action-creators';
 import { useDispatch } from 'react-redux';
@@ -10,11 +11,14 @@ const NoteSC = styled.div`
   margin: 10px;
   margin-top: 0;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;  border-radius: 5px;
-  padding: 3px 10px;
+  padding: 15px;
   width: 100%;
+  height: 150px;
   `
 const H3 = styled.h3`
   width: 80%;
+  display: inline;
+  text-transform: uppercase;
   margin-bottom: 0px;
   white-space: nowrap;
   overflow: hidden;
@@ -54,7 +58,7 @@ const Note: React.FC<{ note: INote }> = ({ note }) => {
   return (
     <>
       <NoteSC style={{ backgroundColor: note.selectedColor }} onClick={showModal}>
-        <H3><strong>{note.category}</strong></H3>
+        <H3><strong>{note.title}</strong></H3>  {note.category}
         <Button style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
         <NoteText>{note.text.length > 15 ? note.text.slice(0, 15) + '...' : note.text} </NoteText>
       </NoteSC>
