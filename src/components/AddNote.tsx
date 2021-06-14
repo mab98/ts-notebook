@@ -36,7 +36,6 @@ const ColorButton = styled(Button)`
 type InputInterface = Pick<INote, 'title' | 'text' | 'category'>
 
 const AddNote: React.FC = () => {
-    const [category, setCategory] = useState<string | undefined>();
     const [input, setInput] = useState<InputInterface>({
         title: '',
         text: '',
@@ -45,6 +44,7 @@ const AddNote: React.FC = () => {
     const [selectedColor, setSelectedColor] = useState('#fff');
 
     const dispatch = useDispatch();
+    const category = undefined;
 
 
     const addNote = (): void => {
@@ -69,7 +69,6 @@ const AddNote: React.FC = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setInput({
             ...input,
-            category,
             [e.target.name]: e.target.value
         })
     }
@@ -100,7 +99,7 @@ const AddNote: React.FC = () => {
                             <Select
                                 placeholder="Category"
                                 style={{ width: '100%' }}
-                                onChange={(value: string) => setCategory(value)}
+                                onChange={(value: string) => setInput({ ...input, category: value })}
                             >
                                 <Option value="Home">Home</Option>
                                 <Option value="Work">Work</Option>
