@@ -17,6 +17,7 @@ const AddNoteContainer = styled.div`
 `
 const AddNoteForm = styled(Form)`
   margin: 10px;
+  width: 375px;
   box-shadow: 0px 1px 3px 1px rgba(138, 130, 130, 0.5);
   border-radius: 5px;
   padding: 20px;
@@ -45,7 +46,6 @@ const AddNote: React.FC = () => {
 
     const dispatch = useDispatch();
     const category = undefined;
-
 
     const addNote = (): void => {
         dispatch(addNoteAction({ id: uuidv4(), ...input, selectedColor }));
@@ -79,25 +79,25 @@ const AddNote: React.FC = () => {
                 <Row>
                     <Col span={24}>
                         <Form.Item name="title" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='Title...' name='title' onChange={handleChange} />
+                            <Input type="text" placeholder='Title ...' name='title' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span={24}>
                         <Form.Item name="text" rules={[{ required: true }]} >
-                            <TextArea rows={2} placeholder='Text...' name='text' onChange={handleChange} />
+                            <TextArea rows={2} placeholder='Text ...' name='text' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: "space-between" }}>
-                    <Col style={{ width: '134px' }}>
+                    <Col span={12}>
                         <Form.Item
                             name="category"
                             rules={[{ required: true }]}
                         >
                             <Select
-                                placeholder="Category"
+                                placeholder="Select Category"
                                 style={{ width: '100%' }}
                                 onChange={(value: string) => setInput({ ...input, category: value })}
                             >
@@ -109,11 +109,17 @@ const AddNote: React.FC = () => {
                     </Col>
                     <Col>
                         <Form.Item>
-                            <Tippy interactive={true} content={
-                                <CirclePicker color={selectedColor} circleSize={23} onChangeComplete={(color: ColorResult) => setSelectedColor(color.hex)} />
-                            }>
-                                <ColorButton style={{ backgroundColor: selectedColor }}> Color  </ColorButton>
-                            </Tippy>
+                            <span>
+                                <Tippy interactive={true} content={
+                                    <CirclePicker color={selectedColor} circleSize={23} onChangeComplete={(color: ColorResult) => setSelectedColor(color.hex)} />
+                                }>
+                                    <ColorButton aria-expanded={true} style={{ backgroundColor: selectedColor }}> Color  </ColorButton>
+                                </Tippy>
+                            </span>
+                        </Form.Item>
+                    </Col>
+                    <Col>
+                        <Form.Item>
                             <Button type="primary" htmlType="submit"> Add Note </Button>
                         </Form.Item>
                     </Col>
