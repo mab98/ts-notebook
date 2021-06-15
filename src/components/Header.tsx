@@ -13,15 +13,18 @@ const HeaderSC = styled.header`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   background: ${({ theme }) => theme.colors.primary};
 `
+
 const H1 = styled.h1`
   margin-bottom: 0;
 `
+
 const HeaderLogo = styled.a`
   margin-top: 4px;
   position: absolute;
   top: 4px;
   left: 15px;
 `
+
 const HeaderLogoText = styled.span`
   font-size: 40px;
   font-family: 'Girassol', cursive;

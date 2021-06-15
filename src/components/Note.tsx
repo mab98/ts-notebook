@@ -14,7 +14,8 @@ const NoteSC = styled.div`
   padding: 15px;
   width: 100%;
   height: 150px;
-  `
+`
+
 const H3 = styled.h3`
   width: 80%;
   display: inline;
@@ -23,13 +24,15 @@ const H3 = styled.h3`
   white-space: nowrap;
   overflow: hidden;
   color: ${({ theme }) => theme.colors.text};
-  `
+`
+
 const NoteText = styled.p`
   word-break: break-all;
   white-space: nowrap;
   overflow: hidden;
   color: ${({ theme }) => theme.colors.text};
 `
+
 const ModalSC = styled(Modal)`
   .ant-modal-body {
     padding: 0;
@@ -40,11 +43,14 @@ const ModalSC = styled(Modal)`
   }
 `
 
-const Note: React.FC<{ note: INote }> = ({ note }) => {
+const Note: React.FC<{ note: INote, dragging: boolean }> = ({ note, dragging }) => {
   const dispatch = useDispatch()
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const showModal = (): void => {
-    setIsModalVisible(true);
+
+  const showModal = (e: any): void => {
+    if (dragging == false) {
+      setIsModalVisible(true);
+    } else { setIsModalVisible(false); }
   };
 
   const handleOk = (): void => {

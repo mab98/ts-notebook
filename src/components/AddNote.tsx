@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { addNoteAction } from "../store/action-creators";
 import { useDispatch } from "react-redux";
 import { INote } from "../App";
+
 const { Option } = Select;
 
 const AddNoteContainer = styled.div`
@@ -37,6 +38,8 @@ const ColorButton = styled(Button)`
 type InputInterface = Pick<INote, 'title' | 'text' | 'category'>
 
 const AddNote: React.FC = () => {
+    const dispatch = useDispatch();
+
     const [input, setInput] = useState<InputInterface>({
         title: '',
         text: '',
@@ -44,7 +47,6 @@ const AddNote: React.FC = () => {
     });
     const [selectedColor, setSelectedColor] = useState('#fff');
 
-    const dispatch = useDispatch();
     const category = undefined;
 
     const addNote = (): void => {

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux';
 import { StoreState } from '../store/reducers';
+
 import ReactGridLayout, { WidthProvider } from "react-grid-layout";
 const ResponsiveGridLayout = WidthProvider(ReactGridLayout);
 
@@ -27,11 +28,13 @@ interface ILayout {
   w: number
   h: number
 }
+
 const COL_SIZE = 12;
 const generateLayout = (notes: INote[]): ILayout[] =>
   notes.reduce((acc: ILayout[], item: INote, index) => acc.concat({ i: item.id, x: (index * 2) % COL_SIZE, y: 0, w: 2, h: 1 }), []);
 
 const AllNotes: React.FC = () => {
+  const [dragging, setdragging] = React.useState(false);
   const { storeNotes } = useSelector((state: StoreState) => state)
   return (
     <AllNotesSC>
@@ -43,8 +46,10 @@ const AllNotes: React.FC = () => {
           cols={COL_SIZE}
           isResizable={false}
           isDraggable
+          onDrag={() => setdragging(true)}
+          onDragStop={() => setTimeout(() => setdragging(false))}
         >
-          {storeNotes.notes.map((note: INote) => <div onMouseDown={e => e.stopPropagation()} key={note.id}><Note note={note} /></div>)}
+          {storeNotes.notes.map((note: INote) => <div onMouseDown={e => e.stopPropagation()} key={note.id}><Note dragging={dragging} note={note} /></div>)}
         </ResponsiveGridLayout>
         : <NoNotes> <FontAwesomeIcon size='5x' icon={faLightbulb} /> <br />Notes you add appear here </NoNotes>}
     </AllNotesSC>
