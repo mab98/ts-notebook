@@ -18,8 +18,6 @@ const NoteSC = styled.div`
 
 const H3 = styled.h3`
   width: 80%;
-  display: inline;
-  text-transform: uppercase;
   margin-bottom: 0px;
   white-space: nowrap;
   overflow: hidden;
@@ -28,7 +26,6 @@ const H3 = styled.h3`
 
 const NoteText = styled.p`
   word-break: break-all;
-  white-space: nowrap;
   overflow: hidden;
   color: ${({ theme }) => theme.colors.text};
 `
@@ -64,13 +61,13 @@ const Note: React.FC<{ note: INote, dragging: boolean }> = ({ note, dragging }) 
   return (
     <>
       <NoteSC style={{ backgroundColor: note.selectedColor }} onClick={showModal}>
-        <H3><strong>{note.title}</strong></H3>  {note.category}
+        <H3><strong>{note.title}</strong>  {note.category} </H3>
         <Button style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
         <NoteText>{note.text.length > 50 ? note.text.slice(0, 50) + '...' : note.text} </NoteText>
       </NoteSC>
       <ModalSC footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <div style={{ backgroundColor: note.selectedColor, padding: '20px' }}>
-          <H3><strong>{note.category}</strong></H3>
+          <H3><strong>{note.title}</strong> {note.category} </H3>
           <NoteText>{note.text}</NoteText>
         </div>
       </ModalSC>
