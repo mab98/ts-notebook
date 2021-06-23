@@ -64,6 +64,7 @@
   },
   "devDependencies": {
     "@types/react-color": "^3.0.4",
-    "@types/styled-components": "^5.1.9"
+    "@types/styled-components": "^5.1.9",
+    "jest-canvas-mock": "^2.3.1"
   }
 }
