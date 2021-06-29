@@ -81,14 +81,14 @@ const AddNote: React.FC = () => {
                 <Row>
                     <Col span={24}>
                         <Form.Item name="title" rules={[{ required: true }]} >
-                            <Input type="text" placeholder='Title ...' name='title' onChange={handleChange} />
+                            <Input id='title-input' type="text" placeholder='Title ...' name='title' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span={24}>
                         <Form.Item name="text" rules={[{ required: true }]} >
-                            <TextArea rows={2} placeholder='Text ...' name='text' onChange={handleChange} />
+                            <TextArea id='text-input' rows={2} placeholder='Text ...' name='text' onChange={handleChange} />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -99,19 +99,20 @@ const AddNote: React.FC = () => {
                             rules={[{ required: true }]}
                         >
                             <Select
+                                id='select-category'
                                 placeholder="Select Category"
                                 style={{ width: '100%' }}
                                 onChange={(value: string) => setInput({ ...input, category: value })}
                             >
-                                <Option value="Home">Home</Option>
-                                <Option value="Work">Work</Option>
-                                <Option value="Study">Study</Option>
+                                <Option id='option-home' value="Home">Home</Option>
+                                <Option id='option-work' value="Work">Work</Option>
+                                <Option id='option-study' value="Study">Study</Option>
                             </Select>
                         </Form.Item>
                     </Col>
                     <Col>
                         <Form.Item>
-                            <span>
+                            <span id='tippy'>
                                 <Tippy interactive={true} content={
                                     <CirclePicker color={selectedColor} circleSize={23} onChangeComplete={(color: ColorResult) => setSelectedColor(color.hex)} />
                                 }>
@@ -122,7 +123,7 @@ const AddNote: React.FC = () => {
                     </Col>
                     <Col>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit"> Add Note </Button>
+                            <Button id='submit-btn' type="primary" htmlType="submit"> Add Note </Button>
                         </Form.Item>
                     </Col>
                 </Row>

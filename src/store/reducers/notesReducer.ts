@@ -19,4 +19,4 @@ const notesReducer = (state: INoteState = initialState, action: Action) => {
   }
 };
 
-export default notesReducer;
+export { initialState, notesReducer };
