@@ -2,7 +2,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import AddNote from '../components/AddNote';
-import { render } from '@testing-library/react';
+import { queryByAttribute, render } from '@testing-library/react';
 import { reducers } from '../store/reducers';
 import { store } from '../store';
 import "@testing-library/jest-dom/extend-expect";
@@ -59,5 +59,24 @@ describe("Renders AddNote Component with Redux", () => {
   })
   it('renders AddNote with Redux using renderWithRedux', () => {
     renderWithRedux(<AddNote />)
+  })
+  it("renders DOM elements", () => {
+    const component = renderWithRedux(<AddNote />)
+    const getById = queryByAttribute.bind(null, 'id');
+    const titleInputElement = getById(component.container, 'title-input')
+    const textInputElement = getById(component.container, 'text-input')
+    const categorySelectElement = getById(component.container, 'select-category')
+    const homeOptionElement = getById(component.container, 'option-home')
+    const workOptionElement = getById(component.container, 'option-work')
+    const studyOptionElement = getById(component.container, 'option-study')
+    const submitButtonElement = getById(component.container, 'submit-btn')
+    expect(titleInputElement).toBeTruthy();
+    expect(textInputElement).toBeTruthy();
+    expect(categorySelectElement).toBeTruthy();
+    expect(submitButtonElement).toBeTruthy();
+    // expect(homeOptionElement);
+    // expect(workOptionElement);
+    // expect(studyOptionElement);
+    component.debug()
   })
 });
