@@ -50,7 +50,7 @@ const AddNote: React.FC = () => {
     const category = undefined;
 
     const addNote = (): void => {
-        dispatch(addNoteAction({ id: uuidv4(), ...input, selectedColor }));
+        dispatch(addNoteAction({ id: 'note-' + uuidv4(), ...input, selectedColor }));
         form.resetFields();
         setInput({
             title: '',
@@ -100,13 +100,14 @@ const AddNote: React.FC = () => {
                         >
                             <Select
                                 id='select-category'
+                                data-testid='select-category'
                                 placeholder="Select Category"
                                 style={{ width: '100%' }}
                                 onChange={(value: string) => setInput({ ...input, category: value })}
                             >
-                                <Option id='option-home' value="Home">Home</Option>
-                                <Option id='option-work' value="Work">Work</Option>
-                                <Option id='option-study' value="Study">Study</Option>
+                                <Option id='option-home' data-testid='option-home' value="Home">Home</Option>
+                                <Option id='option-work' data-testid='option-work' value="Work">Work</Option>
+                                <Option id='option-study' data-testid='option-study' value="Study">Study</Option>
                             </Select>
                         </Form.Item>
                     </Col>
