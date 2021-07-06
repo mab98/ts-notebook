@@ -59,10 +59,10 @@ const Note: React.FC<{ note: INote, dragging: boolean }> = ({ note, dragging }) 
   };
 
   return (
-    <>
+    <div data-testid='newNote'>
       <NoteSC style={{ backgroundColor: note.selectedColor }} onClick={showModal}>
-        <H3><strong>{note.title}</strong>  {note.category} </H3>
-        <Button style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
+        <H3><strong>{note.title}</strong></H3>  {note.category}
+        <Button data-testid='delete-btn' style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
         <NoteText>{note.text.length > 50 ? note.text.slice(0, 50) + '...' : note.text} </NoteText>
       </NoteSC>
       <ModalSC footer={null} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
@@ -71,7 +71,7 @@ const Note: React.FC<{ note: INote, dragging: boolean }> = ({ note, dragging }) 
           <NoteText>{note.text}</NoteText>
         </div>
       </ModalSC>
-    </>
+    </div>
 
   )
 }
