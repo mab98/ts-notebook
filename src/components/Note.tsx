@@ -62,7 +62,7 @@ const Note: React.FC<{ note: INote, dragging: boolean }> = ({ note, dragging }) 
   };
 
   return (
-    <div role='note-1' data-testid='note-1'>
+    <div data-testid='newNote'>
       <NoteSC style={{ backgroundColor: note.selectedColor }} onClick={showModal}>
         <H3><strong>{note.title}</strong></H3>  {note.category}
         <Button data-testid='delete-btn' style={{ position: 'absolute', top: '0', right: '-12px', color: 'black', background: 'opaque' }} size="large" type="text" onClick={() => dispatch(deleteNoteAction(note.id))}><DeleteOutlined /></Button>
