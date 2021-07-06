@@ -68,6 +68,38 @@ describe("App", () => {
     expect(newNote).toBeInTheDocument()
     expect(newNote).toHaveTextContent(/lorem/)
   })
+  test('should delete a note', async () => {
+    const { container, debug } = renderWithRedux(<App />);
+    const getById = queryByAttribute.bind(null, 'id')
+
+    const titleInput = getById(container, 'title-input')
+    const textInput = getById(container, 'text-input')
+    const submitBtn = getById(container, 'submit-btn')
+
+    let select = container.querySelector("[data-testid='select-category'] > .ant-select-selector");
+    expect(select).not.toBeNull()
+    let selectCategory = select as Element;
+    await act(async () => { fireEvent.mouseDown(selectCategory) })
+    const value = "Home";
+    expect(await screen.findByTitle(value)).toBeInTheDocument();
+    await act(async () => { fireEvent.click(screen.getByTitle(value)) });
+
+    fireEvent.change(titleInput, { target: { value: "lorem ipsum" } })
+    fireEvent.change(textInput, { target: { value: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum" } })
+    await act(async () => { fireEvent.click(submitBtn) })
+
+    const newNote = screen.getByTestId('newNote')
+    // console.log('NEW NOTE:', newNote);
+    // console.log('NEW NOTE INNER HTML:', newNote.innerHTML);
+    expect(newNote).toBeInTheDocument()
+    expect(newNote).toHaveTextContent(/lorem/)
+
+    const deleteBtn = screen.getByTestId('delete-btn')
+    expect(deleteBtn).toBeInTheDocument()
+    await act(async () => { fireEvent.click(deleteBtn) })
+
+    expect(newNote).not.toBeInTheDocument()
+  })
 
   describe('AddNote', () => {
     test('should render AddNote component', async () => {
